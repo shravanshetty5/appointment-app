@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { AppointmentForm } from './AppointmentForm';
+import { AppointmentList } from './AppointmentList';
+interface AppointmentData {
+    date: string;
+    time: string;
+    subject: string;
+    details: string;
+    id: string;
 }
 
-export default App;
+function App() {
+    const [appointmentState, setAppointmentState] = useState<AppointmentData>({
+        date: '',
+        time: '',
+        subject: '',
+        details: '',
+        id: '',
+    });
+
+    return (
+        <div className="App">
+            <header>
+                <menu>
+                    <ul
+                        style={{
+                            display: 'flex',
+                            listStyleType: 'none',
+                            justifyContent: 'space-evenly',
+                        }}
+                    >
+                        {[
+                            'Schedule an appointment',
+                            'Current appointments',
+                        ].map((item) => (
+                            <li key={item}>{item}</li>
+                        ))}
+                    </ul>
+                </menu>
+            </header>
+            <main>
+                <AppointmentForm
+                    appointmentState={appointmentState}
+                    setAppointmentState={setAppointmentState}
+                ></AppointmentForm>
+                <AppointmentList></AppointmentList>
+            </main>
+        </div>
+    );
+}
+
+export { App };
+export type { AppointmentData };
