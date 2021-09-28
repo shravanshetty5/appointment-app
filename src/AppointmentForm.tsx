@@ -1,6 +1,7 @@
+import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { AppointmentData } from './App';
-interface AppointmentFormProps {
+interface AppointmentFormProps extends RouteComponentProps {
     setAppointmentState: React.Dispatch<React.SetStateAction<AppointmentData>>;
     appointmentState: AppointmentData;
 }
